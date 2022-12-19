@@ -1,2 +1,16 @@
-# GenTech
-Test Task
+# Test task 
+You have to create two scenes. 
+
+The first scene should have a background and a game logo, and in the center of the screen there should be a working circular progress bar, with a text field of percentage that reflects the current progress. The progress bar should show the progress of loading the assets (all icons for the next scene) via AssetBundle. (loading the scene and staying on it should last at least 3 seconds).
+
+The second scene: when the scene is opened, a small window with a translucent background should appear with the following info on it: title of the test assignment, the name of the author, and a clickable link to any of his/her social networks. In the upper right corner of the window, there should be a cross sign that closes the window. We should be able to open this window from the settings of the game with a dedicated button for it. The area behind the window should not be clickable, the opening and closing of the window should be animated with a smooth change of transparency of the window. 
+
+The main window of the second scene should contain the next objects:
+1. Header attached to the top of the window with a settings button on the right. Сlicking on the settings button should open a small window with switches for music, sounds, a button that opens the start window with the info about the candidate (mentioned earlier) and a close button. Music and sfx must be enabled by default. Turning the music on and off should be done by gradually fading or increasing the volume. On the left side of the header, there should be an "Exit" button, which turns off the game. 
+2. The second block of the main window is a horizontal scroll panel. It must have three objects that automatically scroll from left to right (from the first one to the second one, from the second one to the third one, from the third one to the first one, and so on). The player should be able to independently swipe across the panel. The panel should scroll and center on the object closest to the center of the screen. 
+3. The third block, a vertical scroll bar which should contain objects located on the grid vertically in three columns. When clicking on any of the elements of the object, it gets removed with a visible effect of the flying away particles, implemented with the “Particles system”, where each particle is the image of the object that was clicked on. After the disappearance of the object. The objects located below in this column must fill in the blank by moving up to restore the uniformity of the column with a smooth animation. The container for all the objects should be aligned with the height of the longest column. 
+4. The fourth block, footer. At the very bottom of the window should have a "Reset window" button. Clicking on this button should return the window to the initial state (where all the objects are present on the window). 
+
+	All changes in the window should be saved as a JSON structure and when re-entering the game, the window should display the state of the last exit. 
+The game must be designed for a portrait mode only, and be displayed correctly on the portrait screen with any dimensions. Feel free to use any open source assets (except for the Addressables or similar, for us the important implementation is with using AssetBundles only), Unity 2020.3 or later LTS version. The project must be uploaded to a git repository (GitHub / GitLab / Bitbucket / etc. at the author's choice). 
+Details not mentioned in the test assignment are open for your creativity.
