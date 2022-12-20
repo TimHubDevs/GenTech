@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.IO;
@@ -8,11 +9,16 @@ public class BundledObjectLoader : MonoBehaviour
     public string assetName = "BundledImage";
     public string bundleName = "testbundle";
     public string bundleURL = "http://localhost/assetbundle/testbundle";
+    public Action AssetLoaded;
     private string _path;
+
+    private void Awake()
+    {
+        _path = Path.Combine(Application.streamingAssetsPath, bundleName);
+    }
 
     private void Start()
     {
-        _path = Path.Combine(Application.streamingAssetsPath, bundleName);
         // LoadLocalAssetBundle();
         // StartCoroutine(LoadLocalAssetBundleAsync());
         // StartCoroutine(LoadAssetBundleFromWeb());
@@ -33,7 +39,7 @@ public class BundledObjectLoader : MonoBehaviour
         localAssetBundle.Unload(false);
     }
 
-    private IEnumerator LoadLocalAssetBundleAsync()
+    public IEnumerator LoadLocalAssetBundleAsync()
     {
         AssetBundleCreateRequest asyncBundleRequest = AssetBundle.LoadFromFileAsync(_path);
         yield return asyncBundleRequest;
@@ -52,6 +58,7 @@ public class BundledObjectLoader : MonoBehaviour
         Instantiate(prefab);
         
         localAssetBundle.Unload(false);
+        AssetLoaded.Invoke();
     }
 
     private IEnumerator LoadAssetBundleFromWeb()
