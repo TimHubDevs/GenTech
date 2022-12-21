@@ -44,8 +44,8 @@ public class SettingsBlockView : MonoBehaviour
             _musicButton.GetComponent<Image>().sprite = _musicOn;
             isPlayMusic = true;
             Sequence mySequence = DOTween.Sequence();
-            mySequence.PrependCallback(()=>_musicAudioSource.Play())
-                .Append(DOTween.To(() => _musicAudioSource.volume, x => _musicAudioSource.volume = x, 1, 2))
+            mySequence.PrependCallback(() => _musicAudioSource.Play())
+                .Append(DOTween.To(() => _musicAudioSource.volume, x => _musicAudioSource.volume = x, 0.8f, 2))
                 .SetEase(Ease.Flash);
             Debug.LogError("Music on");
         }
@@ -57,11 +57,19 @@ public class SettingsBlockView : MonoBehaviour
         {
             _soundButton.GetComponent<Image>().sprite = _soundOff;
             isPlaySound = false;
+            Sequence mySequence = DOTween.Sequence();
+            mySequence.Append(DOTween.To(() => _soundAudioSource.volume, x => _soundAudioSource.volume = x, 0, 2))
+                .SetEase(Ease.Flash)
+                .AppendCallback(() => { _soundAudioSource.Stop(); });
             Debug.LogError("Sound off");
         }
         else
         {
             _soundButton.GetComponent<Image>().sprite = _soundOn;
+            Sequence mySequence = DOTween.Sequence();
+            mySequence.PrependCallback(() => _soundAudioSource.Play())
+                .Append(DOTween.To(() => _soundAudioSource.volume, x => _soundAudioSource.volume = x, 1f, 2))
+                .SetEase(Ease.Flash);
             isPlaySound = true;
             Debug.LogError("Sound on");
         }

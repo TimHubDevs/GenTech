@@ -5,6 +5,10 @@ public class MainWindow : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _infoBlock;
     [SerializeField] private CanvasGroup _settingsBlock;
+    
+    [SerializeField] private AudioSource _musicAudioSource;
+    [SerializeField] private AudioSource _soundAudioSource;
+    [SerializeField] private AudioClip _soundButtonClick;
 
     private void Start()
     {
@@ -43,5 +47,16 @@ public class MainWindow : MonoBehaviour
         mySequence.PrependCallback(() => { canvasGroup.gameObject.SetActive(true); })
             .Append(DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, endAlpha, 2)).SetEase(Ease.Flash)
             .AppendCallback(() => { canvasGroup.gameObject.SetActive(activateObject); });
+    }
+
+    public void PlayClickSound()
+    {
+        _soundAudioSource.clip = _soundButtonClick;
+        _soundAudioSource.Play();
+    }
+    
+    public void QuitApp()
+    {
+        Application.Quit();
     }
 }
