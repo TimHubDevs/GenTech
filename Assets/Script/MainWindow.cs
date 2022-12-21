@@ -3,32 +3,45 @@ using UnityEngine;
 
 public class MainWindow : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup InfoBlock;
+    [SerializeField] private CanvasGroup _infoBlock;
+    [SerializeField] private CanvasGroup _settingsBlock;
 
     private void Start()
     {
         DOTween.Init();
-        ChangeState(InfoBlock);
+        ChangeVisibilityInfoBlock();
+    }
+
+    public void ChangeVisibilityInfoBlock()
+    {
+        ChangeState(_infoBlock);
+    }
+    
+    public void ChangeVisibilitySettingsBlock()
+    {
+        ChangeState(_settingsBlock);
     }
 
     private void ChangeState(CanvasGroup canvasGroup)
     {
-        bool isActive = InfoBlock.alpha != 0f;
+        bool isActive = canvasGroup.alpha != 0f;
         if (isActive)
         {
             ChangeVisibility(canvasGroup, 0, false);
+            Debug.Log("Hide canvas group");
         }
         else
         {
             ChangeVisibility(canvasGroup, 1, true);
+            Debug.Log("Show canvas group");
         }
     }
 
-    private void ChangeVisibility(CanvasGroup canvasGroup, float endAlpha, bool interactable)
+    private void ChangeVisibility(CanvasGroup canvasGroup, float endAlpha, bool activateObject)
     {
         Sequence mySequence = DOTween.Sequence();
-        mySequence.PrependCallback(() => { canvasGroup.interactable = false; })
-            .Append(DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, endAlpha, 3))
-            .AppendCallback(() => { canvasGroup.interactable = interactable; });
+        mySequence.PrependCallback(() => { canvasGroup.gameObject.SetActive(true); })
+            .Append(DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, endAlpha, 2)).SetEase(Ease.Flash)
+            .AppendCallback(() => { canvasGroup.gameObject.SetActive(activateObject); });
     }
 }
