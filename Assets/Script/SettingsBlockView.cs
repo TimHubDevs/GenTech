@@ -37,7 +37,7 @@ public class SettingsBlockView : MonoBehaviour
             mySequence.Append(DOTween.To(() => _musicAudioSource.volume, x => _musicAudioSource.volume = x, 0, 2))
                 .SetEase(Ease.Flash)
                 .AppendCallback(() => { _musicAudioSource.Pause(); });
-            Debug.LogError("Music off");
+            Debug.Log("Music off");
         }
         else
         {
@@ -47,7 +47,7 @@ public class SettingsBlockView : MonoBehaviour
             mySequence.PrependCallback(() => _musicAudioSource.Play())
                 .Append(DOTween.To(() => _musicAudioSource.volume, x => _musicAudioSource.volume = x, 0.8f, 2))
                 .SetEase(Ease.Flash);
-            Debug.LogError("Music on");
+            Debug.Log("Music on");
         }
     }
 
@@ -61,7 +61,7 @@ public class SettingsBlockView : MonoBehaviour
             mySequence.Append(DOTween.To(() => _soundAudioSource.volume, x => _soundAudioSource.volume = x, 0, 2))
                 .SetEase(Ease.Flash)
                 .AppendCallback(() => { _soundAudioSource.Stop(); });
-            Debug.LogError("Sound off");
+            Debug.Log("Sound off");
         }
         else
         {
@@ -71,7 +71,7 @@ public class SettingsBlockView : MonoBehaviour
                 .Append(DOTween.To(() => _soundAudioSource.volume, x => _soundAudioSource.volume = x, 1f, 2))
                 .SetEase(Ease.Flash);
             isPlaySound = true;
-            Debug.LogError("Sound on");
+            Debug.Log("Sound on");
         }
     }
 }
