@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,9 +11,13 @@ public class MainWindow : MonoBehaviour
     [SerializeField] private AudioSource _soundAudioSource;
     [SerializeField] private AudioClip _soundButtonClick;
 
-    private void Start()
+    private void Awake()
     {
         DOTween.Init();
+    }
+
+    private void Start()
+    {
         ChangeVisibilityInfoBlock();
     }
 
