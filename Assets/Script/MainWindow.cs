@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,9 +6,17 @@ public class MainWindow : MonoBehaviour
     [SerializeField] private CanvasGroup _infoBlock;
     [SerializeField] private CanvasGroup _settingsBlock;
     
+    [SerializeField] private RectTransform _horizontalRect;
+    [SerializeField] private RectTransform _verticalRect;
+    
     [SerializeField] private AudioSource _musicAudioSource;
     [SerializeField] private AudioSource _soundAudioSource;
     [SerializeField] private AudioClip _soundButtonClick;
+    
+    [SerializeField] private GameObject _circularList;
+    [SerializeField] private GameObject _verticalScrollList;
+    private GameObject _circularListObject;
+    private GameObject _verticalScrollListObject;
 
     private void Awake()
     {
@@ -19,6 +26,13 @@ public class MainWindow : MonoBehaviour
     private void Start()
     {
         ChangeVisibilityInfoBlock();
+        CreateCore();
+    }
+
+    private void CreateCore()
+    {
+        _circularListObject = Instantiate(_circularList, _horizontalRect);
+        _verticalScrollListObject = Instantiate(_verticalScrollList, _verticalRect);
     }
 
     public void ChangeVisibilityInfoBlock()
@@ -37,12 +51,10 @@ public class MainWindow : MonoBehaviour
         if (isActive)
         {
             ChangeVisibility(canvasGroup, 0, false);
-            Debug.Log("Hide canvas group");
         }
         else
         {
             ChangeVisibility(canvasGroup, 1, true);
-            Debug.Log("Show canvas group");
         }
     }
 
@@ -58,6 +70,14 @@ public class MainWindow : MonoBehaviour
     {
         _soundAudioSource.clip = _soundButtonClick;
         _soundAudioSource.Play();
+    }
+
+    public void ResetMainScreen()
+    {
+        DOTween.KillAll();
+        DestroyImmediate(_circularListObject);
+        DestroyImmediate(_verticalScrollListObject);
+        CreateCore();
     }
     
     public void QuitApp()
