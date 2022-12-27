@@ -18,21 +18,23 @@ public class MainWindow : MonoBehaviour
     private GameObject _circularListObject;
     private GameObject _verticalScrollListObject;
 
-    private void Awake()
+    public void Init()
     {
         DOTween.Init();
-    }
-
-    private void Start()
-    {
         ChangeVisibilityInfoBlock();
         CreateCore();
+        
+        //sound from save load
+        _musicAudioSource.Play();
     }
 
     private void CreateCore()
     {
         _circularListObject = Instantiate(_circularList, _horizontalRect);
         _verticalScrollListObject = Instantiate(_verticalScrollList, _verticalRect);
+        var cardChoiserView = _verticalScrollListObject.GetComponent<CardChoiserView>();
+        
+        Debug.Log("Created Card");
     }
 
     public void ChangeVisibilityInfoBlock()

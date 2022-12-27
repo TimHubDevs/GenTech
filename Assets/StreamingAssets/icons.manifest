@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 106943789
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3797e543f17a8d5bf6150f3e22d81f4f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c21d61fe394c58399df3c6fb5c7c99b3
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BundledAssets/Icons/Art/Art4.png
+- Assets/BundledAssets/Icons/Art/Art6.png
+- Assets/BundledAssets/Icons/UX/SettingsWhite.png
+- Assets/BundledAssets/Icons/UX/InfoGrey.png
+- Assets/BundledAssets/Icons/Art/Art9.png
+- Assets/BundledAssets/Icons/UX/ExitBlack.png
+- Assets/BundledAssets/Icons/Art/Art3.png
+- Assets/BundledAssets/Icons/Art/Art2.png
+- Assets/BundledAssets/Icons/UX/SoundOff.png
+- Assets/BundledAssets/Icons/UX/MusicOn.png
+- Assets/BundledAssets/Icons/Art/Art5.png
+- Assets/BundledAssets/Icons/Art/Art8.png
+- Assets/BundledAssets/Icons/UX/MusicOff.png
+- Assets/BundledAssets/Icons/Art/Art1.png
+- Assets/BundledAssets/Icons/UX/SettingsBlack.png
+- Assets/BundledAssets/Icons/UX/ExitRed.png
+- Assets/BundledAssets/Icons/Art/Art7.png
+- Assets/BundledAssets/Icons/UX/InfoGreen.png
+- Assets/BundledAssets/Icons/UX/SoundOn.png
+Dependencies: []

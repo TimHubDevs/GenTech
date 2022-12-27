@@ -1,20 +1,22 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Networking;
 
 public class BundledObjectLoader : MonoBehaviour
 {
-    public string assetName = "BundledImage";
-    public string bundleName = "testbundle";
-    public string bundleURL = "http://localhost/assetbundle/testbundle";
-    public Action AssetLoaded;
+    [HideInInspector] public string assetName = "BundledImage";
+    [HideInInspector] public string bundleName = "Icons";
+    [HideInInspector] public string bundleURL = "http://localhost/assetbundle/testbundle";
+    public Action<Dictionary<IconsType, Sprite>> AssetLoaded;
     private string _path;
 
     private void Awake()
     {
         _path = Path.Combine(Application.streamingAssetsPath, bundleName);
+        Debug.Log($"{_path}");
     }
 
     private void Start()
@@ -34,8 +36,8 @@ public class BundledObjectLoader : MonoBehaviour
             return;
         }
 
-        GameObject asset = localAssetBundle.LoadAsset<GameObject>(assetName);
-        Instantiate(asset);
+        // GameObject asset = localAssetBundle.LoadAsset<GameObject>(assetName);
+        // Instantiate(asset);
         localAssetBundle.Unload(false);
     }
 
@@ -51,14 +53,43 @@ public class BundledObjectLoader : MonoBehaviour
             yield break;
         }
 
-        AssetBundleRequest assetRequest = localAssetBundle.LoadAssetAsync<GameObject>(assetName);
+        // AssetBundleRequest assetRequest = localAssetBundle.LoadAssetAsync<GameObject>(assetName);
+        var assetRequest = localAssetBundle.LoadAllAssets<Sprite>();
+        if (assetRequest != null)
+        {
+            Debug.Log($"{assetRequest.Length} is count from load");
+        }
         yield return assetRequest;
+
+        Dictionary<IconsType, Sprite> spriteLibrary = new Dictionary<IconsType, Sprite>();
+        var values = Enum.GetValues(typeof(IconsType));
+        foreach (var sprite in assetRequest)
+        {
+            if (Enum.IsDefined(typeof(IconsType), sprite.name))
+            {
+                Debug.Log($"{sprite.name} matched with enum");
+                foreach (var variable in values)
+                {
+                    var iconsType = variable is IconsType ? (IconsType) variable : IconsType.Art1;
+                    if (iconsType.ToString() == sprite.name)
+                    {
+                        spriteLibrary.Add(iconsType, sprite);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"{sprite.name} not matched with enum");
+            }
+        }
         
-        GameObject prefab = assetRequest.asset as GameObject;
-        Instantiate(prefab);
+        Debug.Log($"{spriteLibrary.Count} is count in dictionary");
+        
+        // GameObject prefab = assetRequest.asset as GameObject;
+        // Instantiate(prefab);
         
         localAssetBundle.Unload(false);
-        AssetLoaded.Invoke();
+        AssetLoaded.Invoke(spriteLibrary);
     }
 
     private IEnumerator LoadAssetBundleFromWeb()
@@ -71,7 +102,7 @@ public class BundledObjectLoader : MonoBehaviour
         {
             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
             
-            Instantiate(bundle.LoadAsset(assetName));
+            // Instantiate(bundle.LoadAsset(assetName));
             bundle.Unload(false);
         }
         else 

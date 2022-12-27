@@ -1,0 +1,19 @@
+﻿public enum IconsType
+{
+    Art1,
+    Art2,
+    Art3,
+    Art4,
+    Art5,
+    Art6,
+    Art7,
+    Art8,
+    Art9,
+    ExitRed,
+    InfoGreen,
+    MusicOff,
+    MusicOn,
+    SoundOff,
+    SoundOn,
+    SettingsWhite,
+}

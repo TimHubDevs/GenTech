@@ -20,11 +20,6 @@ public class SettingsBlockView : MonoBehaviour
     {
         isPlayMusic = true;
         isPlaySound = true;
-
-        if (isPlayMusic)
-        {
-            _musicAudioSource.Play();
-        }
     }
 
     public void MusicButtonPressed()
